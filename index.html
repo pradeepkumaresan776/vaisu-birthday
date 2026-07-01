@@ -376,7 +376,7 @@
             x: Math.random() * (canvas.width - 60) + 30,
             y: -50,
             type: Math.random() > 0.7 ? 'bomb' : (Math.random() > 0.5 ? 'heart' : 'sparkle'),
-            speed: Math.random() * 4 + 4
+            speed: Math.random() * 2 + 2
         });
         setTimeout(spawnHeart, Math.random() * 600 + 300);
     }
@@ -415,11 +415,11 @@
             // Bigger hit area for mobile
             if (Math.abs(h.x - clickX) < 55 && Math.abs(h.y - clickY) < 60) {
                 if (h.type === 'bomb') {
-                    score = Math.max(0, score - 20);
+                    score = Math.max(0, score - 5);
                 } else if (h.type === 'sparkle') {
-                    score += 20;
-                } else {
                     score += 10;
+                } else {
+                    score += 50;
                 }
                 hearts.splice(i, 1);
                 updateScore();
@@ -434,80 +434,7 @@
    
     draw();
 }
-       /*
-        function startGame1() {
-            canvas = document.getElementById('game-canvas');
-            ctx = canvas.getContext('2d');
-            canvas.style.width = canvas.width + "px";
-            canvas.style.height = canvas.height + "px";
-            score = 0;
-            updateScore();
-            game1Running = true;
-            
-            const hearts = [];
-            
-            function spawnHeart() {
-                if (!game1Running) return;
-                hearts.push({
-                    x: Math.random() * (canvas.width - 60) + 30,
-                    y: -50,
-                    type: Math.random() > 0.7 ? 'bomb' : (Math.random() > 0.5 ? 'heart' : 'sparkle'),
-                    speed: Math.random() * 4 + 4
-                });
-                setTimeout(spawnHeart, Math.random() * 600 + 300);
-            }
-            spawnHeart();
-            
-            function draw() {
-                if (!game1Running) return;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                for (let i = hearts.length - 1; i >= 0; i--) {
-                    const h = hearts[i];
-                    h.y += h.speed;
-                    
-                    ctx.font = '40px sans-serif';
-                    if (h.type === 'bomb') ctx.fillText('💣', h.x, h.y);
-                    else if (h.type === 'sparkle') ctx.fillText('💖', h.x, h.y);
-                    else ctx.fillText('❤️', h.x, h.y);
-                    
-                    if (h.y > canvas.height) hearts.splice(i, 1);
-                }
-                
-                requestAnimationFrame(draw);
-            }
-            
-            // Click handler
-            canvas.addEventListener('click', (e) => {
-                if (!game1Running) return;
-                const rect = canvas.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const clickY = e.clientY - rect.top;
-                
-                for (let i = hearts.length - 1; i >= 0; i--) {
-                    const h = hearts[i];
-                    if (Math.abs(h.x - clickX) < 30 && Math.abs(h.y - clickY) < 30) {
-                        if (h.type === 'bomb') {
-                            score = Math.max(0, score - 5);
-                        } else if (h.type === 'sparkle') {
-                            score += 20;
-                        } else {
-                            score += 10;
-                        }
-                        hearts.splice(i, 1);
-                        updateScore();
-                        
-                        if (score >= 100) {
-                            winGame1();
-                        }
-                        break;
-                    }
-                }
-            });
-            
-            draw();
-        }
-        */
+
         function updateScore() {
             document.getElementById('score').textContent = `${score} / 100`;
         }
