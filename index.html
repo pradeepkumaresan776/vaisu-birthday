@@ -359,6 +359,8 @@
         function startGame1() {
             canvas = document.getElementById('game-canvas');
             ctx = canvas.getContext('2d');
+            canvas.style.width = canvas.width + "px";
+            canvas.style.height = canvas.height + "px";
             score = 0;
             updateScore();
             game1Running = true;
