@@ -405,7 +405,7 @@
                 
                 for (let i = hearts.length - 1; i >= 0; i--) {
                     const h = hearts[i];
-                    if (Math.abs(h.x - clickX) < 100 && Math.abs(h.y - clickY) < 100) {
+                    if (Math.abs(h.x - clickX) < -50 && Math.abs(h.y - clickY) < -50) {
                         if (h.type === 'bomb') {
                             score = Math.max(0, score - 5);
                         } else if (h.type === 'sparkle') {
