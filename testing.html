@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Vaishnavi ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap');
+       
+        body { 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .title-font { 
+            font-family: 'Dancing Script', cursive; 
+        }
+        .heart-float, .balloon {
+            position: absolute;
+            animation: floatHeart 8s linear infinite;
+            z-index: 10;
+        }
+        @keyframes floatHeart { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        .screen { 
+            display: none; 
+            min-height: 100vh; 
+        }
+        .active { 
+            display: flex; 
+        }
+        #pet-cat {
+            transition: all 0.3s;
+        }
+        #pet-cat.shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(-12deg); }
+            50% { transform: rotate(12deg); }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem !important; }
+            h2 { font-size: 2.2rem !important; }
+            .text-7xl { font-size: 2.8rem !important; }
+            .text-6xl { font-size: 2.5rem !important; }
+            .text-5xl { font-size: 2.2rem !important; }
+            canvas {
+                width: 92% !important;
+                height: auto !important;
+                max-height: 420px;
+            }
+            .px-6 { padding-left: 1rem; padding-right: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-rose-100 overflow-x-hidden">
+
+    <!-- LANDING PAGE -->
+    <div id="landing" class="screen active flex-col items-center justify-center text-center relative">
+        <div class="absolute inset-0 overflow-hidden" id="floating-container"></div>
+        
+        <div class="relative z-10 px-6">
+            <h1 class="text-7xl md:text-8xl title-font text-pink-600 mb-4 animate-bounce">Happy Birthday</h1>
+            <h2 class="text-6xl md:text-7xl title-font text-rose-500 mb-8">Vaishnavi ❤️</h2>
+
+            <div onclick="startJourney()" 
+                 class="cursor-pointer mx-auto bg-white hover:bg-pink-50 transition-all shadow-2xl text-3xl font-bold text-pink-600 px-12 py-8 rounded-3xl border-4 border-pink-400 hover:scale-110">
+                Click to Begin Your Surprise 🎉
+            </div>
+            
+            <p class="mt-12 text-pink-500 text-xl italic">Made with all my love for the girl who stole my heart</p>
+        </div>
+    </div>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading" class="screen flex-col items-center justify-center bg-black text-white">
+        <div class="text-6xl mb-8 animate-spin">🎂</div>
+        <div class="text-4xl title-font text-pink-400">Someone special is visiting...</div>
+        <div class="mt-12 w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div id="load-bar" class="h-full bg-pink-500 w-0 transition-all duration-3000"></div>
+        </div>
+    </div>
+
+    <!-- PASSWORD SCREEN -->
+    <div id="password-screen" class="screen flex-col items-center justify-center bg-gradient-to-br from-purple-900 to-pink-900 text-white">
+        <div class="max-w-md w-full px-6">
+            <h2 class="text-5xl title-font text-center mb-8">🔐 Access to Birthday Secret</h2>
+            <p class="text-center mb-8 text-pink-300">Hint: Who steals my heart?</p>
+            
+            <input id="password-input" 
+                   type="text" 
+                   placeholder="Enter the magic word..."
+                   class="w-full px-6 py-6 rounded-2xl text-2xl text-center bg-white/10 border-2 border-white/30 focus:border-pink-400 outline-none text-white placeholder:text-white/50">
+            
+            <button onclick="checkPassword()" 
+                    class="mt-6 w-full bg-pink-600 hover:bg-pink-700 py-5 rounded-2xl text-2xl font-bold transition-all">
+                UNLOCK ❤️
+            </button>
+            
+            <div id="password-error" class="text-red-400 text-center mt-4 hidden"></div>
+        </div>
+    </div>
+
+    <!-- BIRTHDAY ANIMATION -->
+    <div id="birthday-animation" class="screen flex-col items-center justify-center bg-black text-white relative overflow-hidden">
+        <div class="text-center z-10">
+            <div class="text-8xl animate-bounce mb-6">🎉🎂🎉</div>
+            <h1 class="text-6xl title-font text-pink-400">Happy Birthday Vaishnavi!</h1>
+            <p class="text-3xl mt-8">You make every day brighter than the last ❤️</p>
+        </div>
+        <button onclick="nextScreen('funny-story')" 
+                class="absolute bottom-12 bg-white text-pink-600 px-10 py-5 rounded-3xl font-bold text-xl hover:scale-105 transition-all">
+            Continue → 
+        </button>
+    </div>
+
+    <!-- FUNNY STORY -->
+    <div id="funny-story" class="screen flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-200 to-purple-200">
+        <div class="max-w-2xl bg-white rounded-3xl shadow-2xl p-10">
+            <h2 class="text-4xl title-font text-center mb-8 text-pink-600">Our Little Funny Story 😂</h2>
+            <div class="space-y-6 text-lg leading-relaxed text-gray-700">
+                <p>Unakku nyabagam irukka 11th mark check pannum pothu.. sharma veetla 🔥</p>
+                <p>Thiru thiru nu mulichitu irunthen... 🤣 251 mark 😂</p>
+                <p>You're not just my girlfriend, you're my favorite chaos partner. Thanks for making life so ridiculously fun.</p>
+            </div>
+        </div>
+
+
+
+        <!-- intha edathula button comment paniten -->
+             <button onclick="nextScreen('game1')" class="mt-12 bg-pink-600 text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-pink-700 transition-all">Next: Catch My Heart Game ❤️</button>
+              
+    </div>
+
+    <!-- GAME 1: CATCH HEARTS -->
+ 
+    <div id="game1" class="screen flex-col items-center justify-center bg-gradient-to-br from-rose-400 to-purple-600 text-white relative overflow-hidden">
+        <div class="absolute top-6 left-1/2 -translate-x-1/2 text-center z-20">
+            <div class="text-3xl font-bold">Catch Hearts ❤️</div>
+            <div id="score" class="text-5xl font-mono mt-2">0 / 100</div>
+        </div>
+
+        <canvas id="game-canvas" width="800" height="500" class="rounded-3xl shadow-2xl border-8 border-white"></canvas>
+
+        <div class="absolute bottom-8 text-center z-20">
+            <div class="flex gap-8 text-sm">
+                <div>❤️ +10</div>
+                <div>💖 +20</div>
+                <div>💣 -20</div>
+            </div>
+            <button onclick="endGame1()" class="mt-4 bg-white/20 hover:bg-white/30 px-8 py-3 rounded-2xl">End Game Early</button>
+        </div>
+    </div> 
+    
+    <!-- SCRATCH CARD -->
+    <div id="scratch-card" class="screen flex-col items-center justify-center bg-gradient-to-br from-amber-100 to-yellow-100">
+        <div class="text-center mb-8">
+            <h2 class="text-5xl title-font text-pink-600">🎁 Scratch Your Gift</h2>
+            <div id="scratch-reveal" class="hidden text-center mt-8">
+            <div class="text-6xl mb-4">💋❤️</div>
+            <h3 class="text-4xl title-font text-pink-600">I Love You Vaisu ❤️</h3>
+            <p class="text-2xl mt-3 text-rose-600">You are my everything 💕</p>
+        </div>
+        </div>
+        <canvas id="scratch-canvas" width="520" height="340" class="border-8 border-amber-800 rounded-3xl shadow-2xl cursor-pointer"></canvas>
+        
+
+        <button onclick="nextScreen('game2')" class="mt-8 hidden bg-pink-600 text-white px-10 py-5 rounded-3xl text-xl font-bold" id="scratch-continue">
+            Continue →
+        </button>
+    </div>
+
+    <!-- GAME 2: FIND BOYFRIEND -->
+    <div id="game2" class="screen flex-col items-center justify-center bg-gradient-to-br from-purple-800 to-pink-800 text-white">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl title-font">Find Your Boyfriend 😎</h2>
+            <p class="text-xl mt-2">Don't pick the wrong guy now...</p>
+        </div>
+        
+        <div id="photo-grid" class="grid grid-cols-3 gap-4 max-w-2xl"></div>
+        
+        <div id="game2-result" class="hidden text-center mt-8"></div>
+    </div>
+
+    <!-- LOVE LETTER -->
+    <div id="love-letter" class="screen flex-col items-center justify-center p-6 bg-gradient-to-br from-rose-100 to-pink-100">
+        <div class="max-w-lg bg-white rounded-3xl shadow-2xl p-12 relative">
+            <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-6xl">💌</div>
+            <h2 class="text-4xl title-font text-center text-pink-600 mb-10">Intha Letter unakku ❤️</h2>
+            <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                <p>My dearest Vaishnavi,</p>
+                <p>Yennaku uniiya rommba rommba pudikum vaisu, na appo appo kiruku thanama nadanthu irupen, nee kooda yosichi irukalaam enna pp ipdi panuthu nu.</p>
+                <p>unaku manasuku kasta paduramaari nadanthu iruntha sorry🥺 sorry😢☹ sorry😔 sorry😢</p>
+                <p>En kitta intha visiyam pudikala na sollu maathikaren vaisu</p>
+                <p>Mthabadi nee enn ellame 🩵😘😙... Varam illama kedacha THEVATHAI ❤️‍🩹😚🫂....</p>
+                <p class="text-right font-bold mt-8">Forever yours,<br>Your secret admirer ❤️</p>
+            </div>
+        </div>
+        <button onclick="nextScreen('photo-gallery')" class="mt-12 bg-pink-600 text-white px-12 py-6 rounded-3xl text-2xl">See Our Memories →</button>
+    </div>
+
+    <!-- PHOTO GALLERY -->
+    <!--
+    <div id="photo-gallery" class="screen bg-black text-white p-8">
+        <h2 class="text-5xl title-font text-center mb-12">Our Beautiful Memories 📸</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    -->
+       
+            <!-- Replace with your actual photos -->
+       <!-- 
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+            <img src="photos/pp.jpeg" class="rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" onclick="showPhoto(this)">
+        </div>
+        <button onclick="nextScreen('final-surprise')" class="mt-16 mx-auto block bg-pink-600 text-white px-12 py-6 rounded-3xl text-2xl">Final Surprise ❤️</button>
+    </div>
+    -->
+    <!-- PHOTO GALLERY - IMPROVED -->
+<div id="photo-gallery" class="screen bg-black text-white p-4 md:p-8">
+    <h2 class="text-4xl md:text-5xl title-font text-center mb-10">Our Beautiful Memories 📸</h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 max-w-6xl mx-auto">
+        <!-- Replace with your actual photos -->
+        <img src="photos/1.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+        
+        <img src="photos/2.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+        
+        <img src="photos/3.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+        
+        <img src="photos/4.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+        
+        <img src="photos/5.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+        
+        <img src="photos/6.jpg" 
+             class="w-full aspect-square object-cover rounded-3xl shadow-xl hover:scale-105 transition-all cursor-pointer" 
+             onclick="showPhoto(this)">
+    </div>
+
+    <button onclick="nextScreen('final-surprise')" 
+            class="mt-12 md:mt-16 mx-auto block bg-pink-600 text-white px-10 py-6 rounded-3xl text-xl md:text-2xl font-bold">
+        Final Surprise ❤️
+    </button>
+</div>
+
+
+    <!-- FINAL SURPRISE -->
+    <div id="final-surprise" class="screen flex-col items-center justify-center bg-black text-white relative overflow-hidden">
+        <canvas id="fireworks-canvas" class="absolute inset-0"></canvas>
+        
+        <div class="text-center z-10">
+            <h1 class="text-7xl title-font text-pink-400 mb-6">Happy Birthday Vaishnavi ❤️</h1>
+            <p class="text-3xl max-w-md mx-auto">Thank you for making my life beautiful.<br>I Love You Forever.</p>
+            
+            <div class="mt-16 flex flex-wrap gap-6 justify-center">
+                <button onclick="replayAll()" class="bg-white/10 hover:bg-white/20 px-8 py-5 rounded-3xl text-xl">Replay Memories</button>
+                <button onclick="window.location.reload()" class="bg-pink-600 hover:bg-pink-700 px-8 py-5 rounded-3xl text-xl">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING CAT -->
+    <div onclick="petCat()" id="pet-cat" 
+         class="fixed bottom-8 right-8 text-6xl cursor-pointer transition-all hover:scale-125 z-50">
+        🐱
+    </div>
+
+    <div id="cat-toast" class="hidden fixed bottom-24 right-8 bg-white text-pink-600 px-6 py-4 rounded-2xl shadow-2xl text-xl font-medium"></div>
+    <script>
+        // === Your full script (same as before) ===
+        // Tailwind script already loaded
+
+        let currentScreen = 'landing';
+        let lovePoints = 0;
+        let catClicks = 0;
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            const target = document.getElementById(screenId);
+            if (target) target.classList.add('active');
+            currentScreen = screenId;
+        }
+
+        function nextScreen(nextId) {
+            showScreen(nextId);
+        }
+
+        // Floating elements on landing
+        function createFloating() {
+            const container = document.getElementById('floating-container');
+            setInterval(() => {
+                if (currentScreen !== 'landing') return;
+                
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.textContent = Math.random() > 0.5 ? '❤️' : '🎈';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 1.8) + 'rem';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 15000);
+            }, 400);
+        }
+
+        function startJourney() {
+            showScreen('loading');
+            const bar = document.getElementById('load-bar');
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.random() * 12;
+                if (width > 100) width = 100;
+                bar.style.width = width + '%';
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => showScreen('password-screen'), 600);
+                }
+            }, 80);
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value.trim().toLowerCase();
+            const error = document.getElementById('password-error');
+            
+            if (input === 'vaisu' || input.includes('vaisu')) {
+                showScreen('birthday-animation');
+            } else {
+                error.classList.remove('hidden');
+                error.textContent = "Wrong password... Try again cutie 😘 (Hint: Who steals my heart?)... just 5 letter";
+                setTimeout(() => error.classList.add('hidden'), 3000);
+            }
+        }
+
+        // Game 1 - Catch Hearts
+        
+        let game1Running = false;
+        let score = 0;
+        let canvas, ctx;
+       
+        function startGame1() {
+            canvas = document.getElementById('game-canvas');
+            ctx = canvas.getContext('2d');
+            score = 0;
+            updateScore();
+            game1Running = true;
+            
+            const hearts = [];
+            
+            function spawnHeart() {
+                if (!game1Running) return;
+                hearts.push({
+                    x: Math.random() * (canvas.width - 60) + 30,
+                    y: -50,
+                    type: Math.random() > 0.7 ? 'bomb' : (Math.random() > 0.5 ? 'heart' : 'sparkle'),
+                    speed: Math.random() * 4 + 4
+                });
+                setTimeout(spawnHeart, Math.random() * 600 + 300);
+            }
+            spawnHeart();
+            
+            function draw() {
+                if (!game1Running) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = hearts.length - 1; i >= 0; i--) {
+                    const h = hearts[i];
+                    h.y += h.speed;
+                    
+                    ctx.font = '40px sans-serif';
+                    if (h.type === 'bomb') ctx.fillText('💣', h.x, h.y);
+                    else if (h.type === 'sparkle') ctx.fillText('💖', h.x, h.y);
+                    else ctx.fillText('❤️', h.x, h.y);
+                    
+                    if (h.y > canvas.height) hearts.splice(i, 1);
+                }
+                
+                requestAnimationFrame(draw);
+            }
+            
+            // Click handler
+            canvas.addEventListener('click', (e) => {
+                if (!game1Running) return;
+                const rect = canvas.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+                
+                for (let i = hearts.length - 1; i >= 0; i--) {
+                    const h = hearts[i];
+                    if (Math.abs(h.x - clickX) < 50 && Math.abs(h.y - clickY) < 50) {
+                        if (h.type === 'bomb') {
+                            score = Math.max(0, score - 20);
+                        } else if (h.type === 'sparkle') {
+                            score += 20;
+                        } else {
+                            score += 10;
+                        }
+                        hearts.splice(i, 1);
+                        updateScore();
+                        
+                        if (score >= 100) {
+                            winGame1();
+                        }
+                        break;
+                    }
+                }
+            });
+            
+            draw();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `${score} / 100`;
+        }
+
+        function winGame1() {
+            game1Running = false;
+            alert("🎉 Achievement Unlocked: Professional Heart Thief ❤️\nYou caught enough love!");
+            setTimeout(() => nextScreen('scratch-card'), 800);
+        }
+
+        function endGame1() {
+            game1Running = false;
+            nextScreen('scratch-card');
+        }
+        
+        // Scratch Card
+    function initScratchCard() {
+    const canvas = document.getElementById('scratch-canvas');
+    const ctx = canvas.getContext('2d');
+    let scratched = 0;
+
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 30px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Scratch Me Vaisu!', canvas.width/2, 100);
+
+    let scratching = false;
+
+    function scratch(e) {
+        if (!scratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI*2);
+        ctx.fill();
+
+        scratched++;
+        if (scratched > 40) {
+            document.getElementById('scratch-reveal').classList.remove('hidden');
+            document.getElementById('scratch-continue').classList.remove('hidden');
+        }
+    }
+
+    canvas.addEventListener('mousedown', () => scratching = true);
+    canvas.addEventListener('mouseup', () => scratching = false);
+    canvas.addEventListener('mousemove', scratch);
+    canvas.addEventListener('touchstart', () => scratching = true);
+    canvas.addEventListener('touchmove', scratch);
+    canvas.addEventListener('touchend', () => scratching = false);
+}
+
+        // Game 2 - Find Boyfriend
+        function startGame2() {
+            const grid = document.getElementById('photo-grid');
+            grid.innerHTML = '';
+            
+            const images = [
+                'photos/pp.jpeg',  // you (change this to your photo)
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg',
+                'photos/pp.jpeg'
+            ];
+            
+            // Shuffle
+            images.sort(() => Math.random() - 0.5);
+            
+            images.forEach((src, index) => {
+                const div = document.createElement('div');
+                div.className = 'aspect-square rounded-3xl overflow-hidden border-4 border-white/30 hover:border-white cursor-pointer transition-all';
+                div.innerHTML = `<img src="${src}" class="w-full h-full object-cover">`;
+                div.onclick = () => handleBoyfriendClick(index, src);
+                grid.appendChild(div);
+            });
+        }
+
+        function handleBoyfriendClick(index, src) {
+            const resultDiv = document.getElementById('game2-result');
+            
+            if (index === 0 || src.includes('64')) { // assuming first is you
+                resultDiv.innerHTML = `
+                    <div class="text-6xl mb-4">Yesssss ❤️</div>
+                    <div class="text-3xl">You found the handsome one!</div>
+                    <button onclick="nextScreen('love-letter')" class="mt-8 bg-white text-pink-600 px-10 py-6 rounded-3xl text-2xl font-bold">Continue to Love Letter</button>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="text-5xl mb-4">Seriously?? 😭</div>
+                    <div class="text-2xl">You picked another guy?</div>
+                    <button onclick="startGame2()" class="mt-8 bg-pink-600 px-10 py-6 rounded-3xl text-xl">Try Again</button>
+                `;
+            }
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Pet Cat
+        function petCat() {
+            catClicks++;
+            const toast = document.getElementById('cat-toast');
+            
+            const messages = [
+                "Meow! 🐱",
+                "Happy Birthday Vaishnavi ❤️",
+                "I love you too!",
+                "You're the best hooman!"
+            ];
+            
+            toast.textContent = messages[catClicks % messages.length];
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => toast.classList.add('hidden'), 1800);
+            
+            if (catClicks >= 8) {
+                toast.textContent = "Achievement Unlocked: Cat Lover 🐱";
+            }
+        }
+
+        // Simple fireworks for final screen
+        function launchFireworks() {
+            const canvas = document.getElementById('fireworks-canvas');
+            const fctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Very simple particle fireworks
+            setInterval(() => {
+                fctx.fillStyle = `rgba(255, 20, 147, ${Math.random()})`;
+                fctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height*0.6, 8, 8);
+            }, 60);
+        }
+
+        function replayAll() {
+            window.location.reload();
+        }
+
+        function showPhoto(img) {
+            alert("Beautiful memory captured forever ❤️");
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === " " && currentScreen === 'birthday-animation') {
+                nextScreen('funny-story');
+            }
+        });
+
+        // Initialize everything
+        window.onload = () => {
+            createFloating();
+            
+            // Auto start game 1 when screen shows
+            const game1Observer = new MutationObserver((mutations) => {
+                if (document.getElementById('game1').classList.contains('active') && !game1Running) {
+                    setTimeout(startGame1, 600);
+                }
+            });
+            game1Observer.observe(document.getElementById('game1'), { attributes: true });
+            
+            // Scratch card
+            const scratchObserver = new MutationObserver(() => {
+                if (document.getElementById('scratch-card').classList.contains('active')) {
+                    initScratchCard();
+                }
+            });
+            scratchObserver.observe(document.getElementById('scratch-card'), { attributes: true });
+            
+            // Game 2
+            const game2Observer = new MutationObserver(() => {
+                if (document.getElementById('game2').classList.contains('active')) {
+                    startGame2();
+                }
+            });
+            game2Observer.observe(document.getElementById('game2'), { attributes: true });
+            
+            // Final screen
+            const finalObserver = new MutationObserver(() => {
+                if (document.getElementById('final-surprise').classList.contains('active')) {
+                    launchFireworks();
+                }
+            });
+            finalObserver.observe(document.getElementById('final-surprise'), { attributes: true });
+            
+            // Make cat clickable hint
+            setTimeout(() => {
+                document.getElementById('pet-cat').classList.add('animate-bounce');
+            }, 8000);
+        };
+    </script>
+</body>
+</html>
