@@ -32,10 +32,10 @@
             display: flex; 
         }
         #pet-cat {
-            transition: all 0.3s;
+            transition: all 0.5s;
         }
         #pet-cat.shake {
-            animation: shake 0.5s;
+            animation: shake 0.9s;
         }
         @keyframes shake {
             0%, 100% { transform: rotate(-12deg); }
@@ -413,13 +413,13 @@
             const h = hearts[i];
             
             // Bigger hit area for mobile
-            if (Math.abs(h.x - clickX) < 55 && Math.abs(h.y - clickY) < 60) {
+            if (Math.abs(h.x - clickX) < 55 && Math.abs(h.y - clickY) < 50) {
                 if (h.type === 'bomb') {
                     score = Math.max(0, score - 5);
                 } else if (h.type === 'sparkle') {
                     score += 10;
                 } else {
-                    score += 50;
+                    score += 5;
                 }
                 hearts.splice(i, 1);
                 updateScore();
